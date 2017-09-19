@@ -10,19 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919015236) do
+ActiveRecord::Schema.define(version: 20170919021728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
+  create_table "fusers", force: :cascade do |t|
     t.string "name"
     t.string "genera"
     t.string "game"
-    t.string "gender"
     t.string "hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "ledgers", force: :cascade do |t|
+    t.bigint "muser_id"
+    t.bigint "fuser_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fuser_id"], name: "index_ledgers_on_fuser_id"
+    t.index ["muser_id"], name: "index_ledgers_on_muser_id"
+  end
+
+  create_table "musers", force: :cascade do |t|
+    t.string "name"
+    t.string "genera"
+    t.string "game"
+    t.string "hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "ledgers", "fusers"
+  add_foreign_key "ledgers", "musers"
 end

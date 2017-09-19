@@ -1,10 +1,9 @@
-class CreateUsers < ActiveRecord::Migration[5.1]
+class CreateMusers < ActiveRecord::Migration[5.1]
   def change
-    create_table :users do |t|
+    create_table :musers do |t|
       t.string :name
       t.string :genera
       t.string :game
-      t.string :gender
       t.string :hours
 
       t.timestamps

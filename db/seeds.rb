@@ -7,9 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create([
-  {name: 'Grant', genera: 'RPG', game: 'Breath of the Wild', gender: 'M', hours: 'Pasific'},
-  {name: 'Lucy', genera: 'RPG', game: 'Skyrim', gender: 'F', hours: 'Eastern'},
-  {name: 'Keith', genera: 'Strategy', game: 'XCOM 2', gender: 'M', hours: 'Pasific'},
-  {name: 'Suzy', genera: 'Casual', game: 'Animal Crossing', gender: 'F', hours: 'Pasific'},
+Muser.create([
+  {name: 'Grant', genera: 'RPG', game: 'Breath of the Wild', hours: 'Pasific'},
+  {name: 'Keith', genera: 'Strategy', game: 'XCOM 2', hours: 'Pasific'},
+])
+
+Fuser.create([
+  {name: 'Lucy', genera: 'RPG', game: 'Skyrim', hours: 'Eastern'},
+  {name: 'Suzy', genera: 'Casual', game: 'Animal Crossing', hours: 'Pasific'},
 ])
