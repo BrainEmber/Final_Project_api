@@ -3,8 +3,10 @@ class FusersController < ApplicationController
 
   def login
       fuser = Fuser.find_by(username: params[:fuser][:username])
+
       if fuser && fuser.authenticate(params[:fuser][:password])
-        render json: {status: 200, fuser: fuser}
+        token = create_token(fuser.id, fuser.username)
+        render json: {status: 200, token: token, fuser: fuser}
       else
         render json: {status: 401, message: "Unauthorized"}
       end
@@ -49,6 +51,27 @@ class FusersController < ApplicationController
   end
 
   private
+
+  def create_token(id, username)
+    JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
+  end
+
+  def payload(id, username)
+  {
+    exp: (Time.now + 30.minutes).to_i,
+    iat: Time.now.to_i,
+    iss: ENV['JWT_ISSUER'],
+    user: {
+      id: id,
+      username: username
+    }
+  }
+  end
+
+
+
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_fuser
       @fuser = Fuser.find(params[:id])
