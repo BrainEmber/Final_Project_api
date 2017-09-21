@@ -1,6 +1,17 @@
 class MusersController < ApplicationController
   before_action :set_muser, only: [:show, :update, :destroy]
 
+
+  def login
+      muser = Muser.find_by(username: params[:muser][:username])
+      if muser && muser.authenticate(params[:muser][:password])
+        render json: {status: 200, muser: muser}
+      else
+        render json: {status: 401, message: "Unauthorized"}
+      end
+  end
+
+
   # GET /musers
   def index
     @musers = Muser.all

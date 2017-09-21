@@ -1,6 +1,16 @@
 class FusersController < ApplicationController
   before_action :set_fuser, only: [:show, :update, :destroy]
 
+  def login
+      fuser = Fuser.find_by(username: params[:fuser][:username])
+      if fuser && fuser.authenticate(params[:fuser][:password])
+        render json: {status: 200, fuser: fuser}
+      else
+        render json: {status: 401, message: "Unauthorized"}
+      end
+  end
+
+
   # GET /fusers
   def index
     @fusers = Fuser.all
