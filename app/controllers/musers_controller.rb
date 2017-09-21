@@ -4,7 +4,9 @@ class MusersController < ApplicationController
 
   def login
       muser = Muser.find_by(username: params[:muser][:username])
+
       if muser && muser.authenticate(params[:muser][:password])
+        token = create_token(muser.id, muser.username)
         render json: {status: 200, muser: muser}
       else
         render json: {status: 401, message: "Unauthorized"}
@@ -50,6 +52,25 @@ class MusersController < ApplicationController
   end
 
   private
+
+    def create_token(id, username)
+      JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
+    end
+
+    def payload(id, username)
+    {
+      exp: (Time.now + 30.minutes).to_i,
+      iat: Time.now.to_i,
+      iss: ENV['JWT_ISSUER'],
+      user: {
+        id: id,
+        username: username
+      }
+    }
+  end
+
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_muser
       @muser = Muser.find(params[:id])
