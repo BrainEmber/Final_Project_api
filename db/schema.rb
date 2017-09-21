@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(version: 20170919021728) do
   enable_extension "plpgsql"
 
   create_table "fusers", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
+    t.string "password_digest"
     t.string "genera"
     t.string "game"
     t.string "hours"
@@ -34,7 +35,8 @@ ActiveRecord::Schema.define(version: 20170919021728) do
   end
 
   create_table "musers", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
+    t.string "password_digest"
     t.string "genera"
     t.string "game"
     t.string "hours"

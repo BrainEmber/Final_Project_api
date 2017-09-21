@@ -8,11 +8,11 @@
 
 
 Muser.create([
-  {name: 'Grant', genera: 'RPG', game: 'Breath of the Wild', hours: 'Pasific'},
-  {name: 'Keith', genera: 'Strategy', game: 'XCOM 2', hours: 'Pasific'},
+  {username: 'Grant', password: 'Grant', genera: 'RPG', game: 'Breath of the Wild', hours: 'Pasific'},
+  {username: 'Keith', password: 'Keith', genera: 'Strategy', game: 'XCOM 2', hours: 'Pasific'},
 ])
 
 Fuser.create([
-  {name: 'Lucy', genera: 'RPG', game: 'Skyrim', hours: 'Eastern'},
-  {name: 'Suzy', genera: 'Casual', game: 'Animal Crossing', hours: 'Pasific'},
+  {username: 'Lucy', password: 'Lucy', genera: 'RPG', game: 'Skyrim', hours: 'Eastern'},
+  {username: 'Suzy', password: 'Suzy', genera: 'Casual', game: 'Animal Crossing', hours: 'Pasific'},
 ])
