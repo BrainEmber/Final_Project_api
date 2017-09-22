@@ -1,6 +1,7 @@
 class MusersController < ApplicationController
   before_action :set_muser, only: [:show, :update, :destroy]
   before_action :authenticate_token, except: [:login, :create]
+  before_action :authorize_muser, except: [:login, :create, :index]
 
 
   def login
@@ -24,7 +25,7 @@ class MusersController < ApplicationController
 
   # GET /musers/1
   def show
-    render json: get_current_muser
+    render json: @user
   end
 
   # POST /musers

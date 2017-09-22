@@ -1,6 +1,7 @@
 class FusersController < ApplicationController
   before_action :set_fuser, only: [:show, :update, :destroy]
   before_action :authenticate_token, except: [:login, :create]
+  before_action :authorize_fuser, except: [:login, :create, :index]
 
   def login
       fuser = Fuser.find_by(username: params[:fuser][:username])
@@ -23,7 +24,7 @@ class FusersController < ApplicationController
 
   # GET /fusers/1
   def show
-    render json: get_current_fuser
+    render json: @user
   end
 
   # POST /fusers

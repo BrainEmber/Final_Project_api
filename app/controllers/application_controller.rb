@@ -40,5 +40,22 @@ class ApplicationController < ActionController::API
   end
 
 
+  # Restricting user from using params routes they dont own
+
+  def authorize_muser
+    puts "AUTHORIZE USER"
+    puts "user id #{get_current_muser.id}"
+    puts "params: #{params[:id]}"
+    render json: { status: 401, message: 'Unauthorized'} unless get_current_muser.id == params[:id].to_i
+  end
+
+  def authorize_fuser
+    puts "AUTHORIZE USER"
+    puts "user id #{get_current_fuser.id}"
+    puts "params: #{params[:id]}"
+    render json: { status: 401, message: 'Unauthorized'} unless get_current_fuser.id == params[:id].to_i
+  end
+
+
 
 end
