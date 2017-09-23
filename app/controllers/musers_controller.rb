@@ -25,7 +25,7 @@ class MusersController < ApplicationController
 
   # GET /musers/1
   def show
-    render json: @user
+    render json: @muser
   end
 
   # POST /musers
