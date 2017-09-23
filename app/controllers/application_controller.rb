@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
     puts "DECODE TOKEN, token input: #{token_input}"
     token = JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256'})
     JWT.decode(token_input, ENV['JWT_SECRET'], true, { :algorithm => 'HS256'})
-    render json: { status: 200, message: token}
+    render json: {token}
   rescue
     render json: { status: 401, message: 'Unauthorized'}
   end
