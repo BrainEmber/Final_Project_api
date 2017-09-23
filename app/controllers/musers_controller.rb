@@ -10,6 +10,7 @@ class MusersController < ApplicationController
       if muser && muser.authenticate(params[:muser][:password])
         token = create_token(muser.id, muser.username)
         render json: {status: 200, token: token, muser: muser}
+        
       else
         render json: {status: 401, message: "Unauthorized"}
       end
