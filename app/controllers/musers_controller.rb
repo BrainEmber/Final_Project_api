@@ -2,6 +2,7 @@ class MusersController < ApplicationController
   before_action :set_muser, only: [:show, :update, :destroy]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_muser, except: [:login, :create, :index]
+  wrap_parameters :muser, include: [:username, :genera, :game, :hours, :password, :password_confirmation]
 
 
   def login
@@ -10,7 +11,7 @@ class MusersController < ApplicationController
       if muser && muser.authenticate(params[:muser][:password])
         token = create_token(muser.id, muser.username)
         render json: {status: 200, token: token, muser: muser}
-        
+
       else
         render json: {status: 401, message: "Unauthorized"}
       end
@@ -81,6 +82,6 @@ class MusersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def muser_params
-      params.require(:muser).permit(:name, :genera, :game, :hours)
+      params.require(:muser).permit(:username, :genera, :game, :hours, :password, :password_confirmation)
     end
 end
