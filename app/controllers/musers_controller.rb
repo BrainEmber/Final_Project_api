@@ -52,7 +52,8 @@ class MusersController < ApplicationController
 
   # DELETE /musers/1
   def destroy
-    @muser.destroy
+    @muser = Muser.destroy(params[:id])
+    render json: {status: 204}
   end
 
   private
