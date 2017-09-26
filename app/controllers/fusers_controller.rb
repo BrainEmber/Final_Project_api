@@ -51,7 +51,8 @@ class FusersController < ApplicationController
 
   # DELETE /fusers/1
   def destroy
-    @fuser.destroy
+    @fuser = Fuser.destroy(params[:id])
+    render json: {status: 204}
   end
 
   private
