@@ -2,6 +2,8 @@ class FusersController < ApplicationController
   before_action :set_fuser, only: [:show, :update, :destroy]
   before_action :authenticate_token, except: [:login, :create]
   before_action :authorize_fuser, except: [:login, :create, :index]
+  wrap_parameters :fuser, include: [:username, :genera, :game, :hours, :password, :password_confirmation]
+
 
   def login
       fuser = Fuser.find_by(username: params[:fuser][:username])
@@ -81,6 +83,6 @@ class FusersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def fuser_params
-      params.require(:fuser).permit(:name, :genera, :game, :hours)
+      params.require(:fuser).permit(:username, :genera, :game, :hours, :password, :password_confirmation)
     end
 end
