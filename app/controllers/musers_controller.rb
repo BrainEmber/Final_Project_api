@@ -44,6 +44,7 @@ class MusersController < ApplicationController
 
   # PATCH/PUT /musers/1
   def update
+    @muser = Muser.find(params[:id])
     if @muser.update(muser_params)
       render json: @muser
     else
