@@ -6,6 +6,7 @@ class MusersController < ApplicationController
 
 
   def login
+    puts "Login Method"
       muser = Muser.find_by(username: params[:muser][:username])
 
       if muser && muser.authenticate(params[:muser][:password])
@@ -52,6 +53,7 @@ class MusersController < ApplicationController
 
   # DELETE /musers/1
   def destroy
+    puts "hello"
     @muser = Muser.destroy(params[:id])
     render json: {status: 204}
   end
