@@ -42,6 +42,7 @@ class FusersController < ApplicationController
 
   # PATCH/PUT /fusers/1
   def update
+    @fuser = Fuser.find(params[:id])
     if @fuser.update(fuser_params)
       render json: @fuser
     else
